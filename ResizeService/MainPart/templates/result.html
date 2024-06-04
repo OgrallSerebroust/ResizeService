@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for url in result_urls %}
+        <div class="row">
+            <div class="col-12">
+                <a href="{{ url }}">
+                    {{ host }}{{ url }}
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

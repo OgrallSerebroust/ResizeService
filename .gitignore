@@ -1,0 +1,10 @@
+__pycache__
+admin
+media
+migrations
+bootstrap.*
+db.sqlite3
+jquery*
+passenger_wsgi.py
+script.js
+settings.py

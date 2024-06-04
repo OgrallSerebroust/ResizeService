@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}
+    Редактор
+{% endblock %}
+{% block content %}
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <svg class="bi me-2" width="40" height="32">
+                <use xlink:href="#bootstrap"></use>
+            </svg>
+            <span class="fs-4">
+                Редактор
+            </span>
+        </a>
+    </header>
+    <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+        <div class="row align-items-center g-lg-5 py-5">
+            <div class="col-lg-7 text-center text-lg-start">
+                <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">
+                    Увеличение размера изображений
+                </h1>
+                <p class="col-lg-10 fs-4">
+                    Вставьте ссылки на фотографии в текстовое поле и выберите необходимое разрешение фотографии. По стандарту, фотографии будут увеличиваться до 1200х1200 разрешения.
+                </p>
+            </div>
+            <div class="col-md-10 mx-auto col-lg-5">
+                <form action="" method="post" class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+                    {% csrf_token %}
+                    <div class="form-floating mb-3">
+                        {{ form.urls }}
+                        <label for="{{ form.urls.id_for_label }}">
+                            {{ form.urls.label }}
+                        </label>
+                    </div>
+                    <div class="checkbox mb-3">
+                        {{ form.is_choose_resolution }}
+                        <label for="{{ form.is_choose_resolution.id_for_label }}">
+                            {{ form.is_choose_resolution.label }}
+                        </label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{ form.height }}
+                        <label for="{{ form.height.id_for_label }}">
+                            {{ form.height.label }}
+                        </label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{ form.weight }}
+                        <label for="{{ form.weight.id_for_label }}">
+                            {{ form.weight.label }}
+                        </label>
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">
+                        Отправить
+                    </button>
+                    <hr class="my-4">
+                    <small class="text-body-secondary">
+                        После нажатия по кнопке Отправить, откроется страница с ссылками на фотографии с измененным размером.
+                    </small>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
