@@ -1,12 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
-    {% for url in result_urls %}
+    {% if not invalid_url %}
+        {% for url in result_urls %}
+            <div class="row">
+                <div class="col-12">
+                    <a href="{{ url }}">
+                        {{ host }}{{ url }}
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3>
+                    Внимание!
+                </h3>
+                <h5>
+                    Замечен объект не являющийся фото, либо данный объект неподдерживаемого расширения
+                </h5>
+            </div>
+        </div>
         <div class="row">
             <div class="col-12">
-                <a href="{{ url }}">
-                    {{ host }}{{ url }}
+                URL элемента:
+                <a href="{{invalid_url}}">
+                    {{invalid_url}}
                 </a>
             </div>
         </div>
-    {% endfor %}
+    {% endif %}
 {% endblock %}

@@ -2,7 +2,6 @@ import datetime
 import re
 import requests
 import os
-import random
 from django.conf import settings
 from django.shortcuts import render
 from io import BytesIO
@@ -20,6 +19,10 @@ def index(request):
             result_urls = []
             for _ in range(len(urls)):
                 urls[_] = "https://" + urls[_]
+                if not re.search(r"(\.png|\.jpg|\.jpeg|\.gif|\.raw|\.tiff|\.tif)$", urls[_]):
+                    return render(request=request, template_name="result.html", context={
+                        "invalid_url": urls[_]
+                    })
                 ImagesConsolidation.objects.create(
                     original_url=urls[_]
                 )
@@ -35,7 +38,7 @@ def index(request):
                 storage_media_path = settings.MEDIA_ROOT + datetime.datetime.now().strftime("%Y%m%d")
                 if not os.path.exists(path=storage_media_path):
                     os.mkdir(path=storage_media_path)
-                result_image_path = storage_media_path + "/" + str(random.randint(1, 999999)) + ".png"
+                result_image_path = storage_media_path + "/" + re.search(r"(?<=\/)[^\/]+(?=\.png|\.jpg|\.jpeg|\.gif|\.raw|\.tiff|\.tif)", urls[_]).group() + ".png" #Raw форматы не обрабатываются, можно добавить
                 new_image.save(result_image_path)
                 ImageModel.objects.create(
                     original_image_id=ImagesConsolidation.objects.last().id,
