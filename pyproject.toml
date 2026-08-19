@@ -1,0 +1,15 @@
+[project]
+name = "resizeservice"
+version = "0.1.0"
+description = "Web app to resize images recived via a link"
+license = "LicenseRef-PolyForm-Noncommercial-1.0.0"
+license-files = [
+    "LICENSE",
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "django>=6.1",
+    "image>=1.5.33",
+    "requests>=2.34.2",
+]

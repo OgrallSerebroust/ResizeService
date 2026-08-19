@@ -1,15 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
     {% if not invalid_url %}
-        {% for url in result_urls %}
+        {% if erroneous_urls %}
             <div class="row">
-                <div class="col-12">
-                    <a href="{{ url }}">
-                        {{ host }}{{ url }}
-                    </a>
+                <div class="col-12 text-center">
+                    <h3>
+                        Внимание!
+                    </h3>
+                    <h5>
+                        Данные страницы не существуют, либо возвращают статус ошибки
+                    </h5>
                 </div>
             </div>
-        {% endfor %}
+            {% for erroneous_url in erroneous_urls %}
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <a href="{{ erroneous_url }}">
+                            {{ erroneous_url }}
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% if result_urls %}
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h3>
+                        Адреса отмасштабированных изображений
+                    </h3>
+                </div>
+            </div>
+            {% for url in result_urls %}
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <a href="{{ url }}">
+                            {{ host }}{{ url }}
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
     {% else %}
         <div class="row">
             <div class="col-12 text-center">
